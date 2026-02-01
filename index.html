@@ -57,7 +57,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path fill="white" fill-opacity="0.1" d="M50,20 C70,20[...]  
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path fill="white" fill-opacity="0.1" d="M50,20 C70,20 85,35 85,55 C85,75 70,90 50,90 C30,90 15,75 15,55 C15,35 30,20 50,20 Z" /></svg>');
             background-size: 120px;
         }
         
@@ -181,7 +181,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path fill="white" fill-opacity="0.1" d="M50,30 C60,20[...]
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path fill="white" fill-opacity="0.1" d="M50,30 C60,20 80,20 90,30 C100,40 100,60 90,70 C80,80 60,80 50,70 C40,80 20,80 10,70 C0,60 0,40 10,30 C20,20 40,20 50,30 Z" /></svg>');
             background-size: 100px;
         }
         
@@ -308,8 +308,6 @@
             font-size: 28px;
             opacity: 0;
             animation: floatAround 10s linear infinite;
-            font-family: "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Segoe UI Symbol", "Twemoji Mozilla", sans-serif;
-            line-height: 1;
         }
         
         @keyframes floatAround {
@@ -497,206 +495,13 @@
                 const size = 20 + Math.random() * 35;
                 const color = getRandomPastelColor();
                 
-                element.style.left = "%";
+                element.style.left = `%`;
                 element.style.animationDelay = `s`;
                 element.style.animationDuration = `s`;
                 element.style.fontSize = `px`;
                 element.style.color = color;
                 
                 container.appendChild(element);
-            }
-        }
-        
-        // Get random pastel color
-        function getRandomPastelColor() {
-            const colors = [
-                '#ffb6c1', '#ffc0cb', '#ffd1dc', '#ffcccb', 
-                '#ffb3de', '#ffccd5', '#ffb7c5', '#f8c8dc'
-            ];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-        
-        // Handle button interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            createFloatingDecorations();
-            
-            const yesBtn = document.getElementById('yesBtn');
-            const noBtn = document.getElementById('noBtn');
-            const responseDisplay = document.getElementById('responseDisplay');
-            const celebrationMessage = document.getElementById('celebrationMessage');
-            
-            let noClickCount = 0;
-            const noButtonPhrases = [
-                "I Need to Think",
-                "Are you sure?",
-                "Maybe...",
-                "Really sure?",
-                "Hmm...",
-                "The other button looks better!",
-                "You're persistent!",
-                "Okay, you win!",
-                "YES! Just kidding...",
-                "FINE! YES!"
-            ];
-            
-            const romanticResponses = [
-                "You've made me the happiest soul alive! I love you infinitely! 💫",
-                "My heart is dancing with joy! Forever yours! 🌹",
-                "This is the best day of my life! I love you endlessly! ✨",
-                "Yes! A million times yes! You are my everything! 💖",
-                "My answer will always be YES! Today, tomorrow, forever! 🌟"
-            ];
-            
-            // Yes button clicked
-            yesBtn.addEventListener('click', function() {
-                const randomResponse = romanticResponses[Math.floor(Math.random() * romanticResponses.length)];
-                celebrationMessage.innerHTML = randomResponse;
-                responseDisplay.style.display = 'block';
-                
-                // Create celebration
-                createCelebration();
-                
-                // Change button appearance
-                yesBtn.innerHTML = '<i class="fas fa-heart"></i> I SAID YES!';
-                yesBtn.style.background = 'linear-gradient(to right, #8a2be2, #ff1493)';
-                yesBtn.style.animation = 'none';
-                
-                // Hide no button
-                noBtn.style.display = 'none';
-                
-                // Play romantic sound
-                playRomanticSound();
-            });
-            
-            // No button clicked
-            noBtn.addEventListener('click', function() {
-                noClickCount++;
-                
-                // If clicked many times, turn into yes
-                if (noClickCount >= noButtonPhrases.length - 2) {
-                    celebrationMessage.innerHTML = "Okay, I can't resist any longer! YES, I'll be your Valentine! 💕";
-                    responseDisplay.style.display = 'block';
-                    noBtn.style.display = 'none';
-                    yesBtn.innerHTML = '<i class="fas fa-heart"></i> She finally said YES!';
-                    createCelebration();
-                    return;
-                }
-                
-                // Change button text
-                noBtn.textContent = noButtonPhrases[noClickCount];
-                
-                // Make yes button more appealing
-                yesBtn.style.transform = 'scale(1.1)';
-                setTimeout(() => {
-                    yesBtn.style.transform = 'scale(1)';
-                }, 300);
-                
-                // Move no button
-                const moveX = (Math.random() - 0.5) * (40 + noClickCount * 10);
-                const moveY = (Math.random() - 0.5) * (30 + noClickCount * 10);
-                noBtn.style.transform = `translate(px, px)`;
-                
-                // Show hint messages
-                if (noClickCount === 2) {
-                    celebrationMessage.innerHTML = "The pink button seems happier... 😊";
-                    responseDisplay.style.display = 'block';
-                    setTimeout(() => {
-                        responseDisplay.style.display = 'none';
-                    }, 2000);
-                }
-                
-                if (noClickCount === 4) {
-                    celebrationMessage.innerHTML = "I think you know the right answer... 💝";
-                    responseDisplay.style.display = 'block';
-                    setTimeout(() => {
-                        responseDisplay.style.display = 'none';
-                    }, 2000);
-                }
-            });
-            
-            // Make no button move on hover
-            noBtn.addEventListener('mouseover', function() {
-                if (noClickCount > 1) {
-                    const maxMove = 80;
-                    const moveX = (Math.random() - 0.5) * maxMove;
-                    const moveY = (Math.random() - 0.5) * maxMove;
-                    this.style.transform = `translate(px, px)`;
-                }
-            });
-        });
-        
-        // Create celebration effect
-        function createCelebration() {
-            const container = document.getElementById('floatingDecorations');
-            container.innerHTML = '';
-            
-            const symbols = ['❤️', '💖', '💕', '🎉', '🥳', '✨', '🌟', '🎊', '🌸', '🌹'];
-            
-            // Create explosion of elements
-            for (let i = 0; i < 60; i++) {
-                setTimeout(() => {
-                    const element = document.createElement('div');
-                    element.classList.add('floating-element');
-                    element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                    
-                    const leftPos = Math.random() * 100;
-                    const delay = Math.random() * 1;
-                    const duration = 1.5 + Math.random() * 2;
-                    const size = 30 + Math.random() * 50;
-                    const colors = ['#ff1493', '#8a2be2', '#ff69b4', '#00b09b', '#ff416c'];
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    
-                    element.style.left = "%";
-                    element.style.animationDelay = `s`;
-                    element.style.animationDuration = `s`;
-                    element.style.fontSize = `px`;
-                    element.style.color = color;
-                    
-                    container.appendChild(element);
-                    
-                    // Remove after animation
-                    setTimeout(() => {
-                        if (element.parentNode) {
-                            element.remove();
-                        }
-                    }, duration * 1000);
-                }, i * 30);
-            }
-            
-            // Recreate regular floating elements after celebration
-            setTimeout(createFloatingDecorations, 3000);
-        }
-        
-        // Play romantic sound
-        function playRomanticSound() {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // Create a romantic chord
-                const notes = [523.25, 659.25, 783.99]; // C, E, G
-                let time = audioContext.currentTime;
-                
-                for (let i = 0; i < notes.length; i++) {
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.value = notes[i];
-                    oscillator.type = 'sine';
-                    
-                    gainNode.gain.setValueAtTime(0, time);
-                    gainNode.gain.linearRampToValueAtTime(0.2, time + 0.1);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, time + 1.5);
-                    
-                    oscillator.start(time);
-                    oscillator.stop(time + 1.5);
-                    
-                    time += 0.05;
-                }
-            } catch (e) {
-                // Audio not supported
             }
         }
     </script>
